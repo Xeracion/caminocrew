@@ -1,5 +1,10 @@
 document.getElementById('year').textContent = new Date().getFullYear();
 
+// Prevent the privacy-policy link inside the checkbox label from toggling the checkbox
+document.querySelectorAll('.checkbox-field a').forEach((link) => {
+  link.addEventListener('click', (e) => e.stopPropagation());
+});
+
 // Mobile nav toggle
 const navToggle = document.getElementById('navToggle');
 const mainNav = document.getElementById('mainNav');
