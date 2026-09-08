@@ -134,31 +134,6 @@ img { max-width: 100%; display: block; }
 .hero-stats strong { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; color: var(--lime); }
 .hero-stats span { font-size: .85rem; color: #9c9c96; }
 
-/* Marquee */
-.marquee {
-  background: var(--lime);
-  border-bottom: 2px solid var(--ink);
-  overflow: hidden;
-  padding: 14px 0;
-}
-.marquee-track {
-  display: flex;
-  gap: 40px;
-  white-space: nowrap;
-  animation: scroll 22s linear infinite;
-  width: max-content;
-}
-.marquee-track span {
-  font-family: 'Space Grotesk', sans-serif;
-  font-weight: 700;
-  font-size: .9rem;
-  letter-spacing: .04em;
-}
-@keyframes scroll {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
-}
-
 /* Sections */
 .section { padding: 96px 0; }
 .section-alt { background: var(--bg-alt); }
