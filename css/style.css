@@ -336,7 +336,6 @@ input:focus, select:focus, textarea:focus { outline: 3px solid var(--lime); outl
 .footer-inner p { color: #9c9c96; font-size: .9rem; max-width: 260px; }
 .footer-links { display: flex; flex-direction: column; gap: 10px; }
 .footer-links a:hover { color: var(--lime); }
-.footer-contact a:hover { color: var(--lime); }
 .footer-legal { text-align: center; color: #6b6b66; font-size: .8rem; margin: 24px 0 0; }
 
 /* Responsive */
