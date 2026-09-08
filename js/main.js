@@ -30,6 +30,20 @@ document.querySelectorAll('.faq-item').forEach((item) => {
   });
 });
 
+// Fade-in sections on scroll
+const revealObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.15, rootMargin: '0px 0px -60px 0px' }
+);
+document.querySelectorAll('.fade-in').forEach((el) => revealObserver.observe(el));
+
 // Booking form
 const bookingForm = document.getElementById('bookingForm');
 const formNote = document.getElementById('formNote');
