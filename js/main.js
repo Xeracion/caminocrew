@@ -53,7 +53,7 @@ document.querySelectorAll('.fade-in').forEach((el) => revealObserver.observe(el)
 // Envía la reserva a un Google Apps Script Web App que guarda la fila en Sheets
 // y notifica por Gmail. Despliega el script de /apps-script/Code.gs y pega aquí
 // su URL de despliegue (ver README.md, sección "Conectar el formulario a Google Workspace").
-const GAS_ENDPOINT_URL = 'https://script.google.com/macros/s/TU_DEPLOYMENT_ID/exec';
+const GAS_ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbx1yTJXbBqW0icMHo9Fdh9nwhVX91FXAia8EnuqDn5VE4iki5Ky3ZwQ0m9RIo30S2Y9/exec';
 
 const bookingForm = document.getElementById('bookingForm');
 const formNote = document.getElementById('formNote');
