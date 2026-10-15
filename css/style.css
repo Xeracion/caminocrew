@@ -330,6 +330,15 @@ img { max-width: 100%; display: block; }
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .form-field { display: flex; flex-direction: column; gap: 8px; }
 .form-field-full { grid-column: 1 / -1; }
+.honeypot-field {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  left: -9999px;
+}
 label { font-weight: 600; font-size: .9rem; }
 input, select, textarea {
   font: inherit;

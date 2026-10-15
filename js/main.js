@@ -58,9 +58,30 @@ const GAS_ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbx1yTJXbBqW0ic
 const bookingForm = document.getElementById('bookingForm');
 const formNote = document.getElementById('formNote');
 const submitBtn = document.getElementById('submitBtn');
+const honeypotField = document.getElementById('website');
+const loadedAtField = document.getElementById('loadedAt');
+const MIN_SUBMIT_SECONDS = 3;
+
+// Marca el instante en que se cargó el formulario, para detectar envíos
+// instantáneos típicos de bots (ver comprobación de tiempo mínimo más abajo)
+loadedAtField.value = String(Date.now());
 
 bookingForm.addEventListener('submit', async (e) => {
   e.preventDefault();
+
+  // Honeypot: campo invisible para personas, pero que los bots suelen rellenar.
+  // Si viene con contenido, descartamos el envío en silencio sin avisar al bot.
+  if (honeypotField.value.trim() !== '') {
+    bookingForm.reset();
+    return;
+  }
+
+  // Un envío que llega en menos de MIN_SUBMIT_SECONDS casi siempre es un bot.
+  const elapsedSeconds = (Date.now() - Number(loadedAtField.value)) / 1000;
+  if (elapsedSeconds < MIN_SUBMIT_SECONDS) {
+    bookingForm.reset();
+    return;
+  }
 
   if (!bookingForm.checkValidity()) {
     bookingForm.reportValidity();

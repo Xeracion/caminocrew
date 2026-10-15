@@ -34,6 +34,15 @@ El formulario de reserva (`#bookingForm` en `js/main.js`) envía los datos a un 
 
 Si en el futuro cambias la lógica del script, tendrás que crear una **nueva versión** de la implementación (Desplegar → Gestionar implementaciones → editar) para que los cambios se apliquen a la URL ya publicada.
 
+### Protección antibots
+
+Como la URL del Web App es pública (`Cualquier usuario` tiene acceso), con el tiempo te llegarán envíos de bots que la encuentran y la rellenan con datos basura. El formulario incluye dos filtros, repetidos tanto en `js/main.js` como en `apps-script/Code.gs` (los bots que atacan la URL directamente se saltan el JavaScript de la página):
+
+- **Honeypot**: un campo oculto (`website`) que las personas nunca ven ni rellenan, pero que los bots que rastrean formularios sí suelen completar. Si llega con contenido, se descarta en silencio.
+- **Tiempo mínimo**: se descartan los envíos que llegan en menos de 3 segundos desde que se cargó la página, algo habitual en bots pero imposible para una persona rellenando el formulario.
+
+Si después de desplegar sigues recibiendo spam, puedes añadir también un CAPTCHA (por ejemplo, [reCAPTCHA v3](https://www.google.com/recaptcha/about/) de Google, invisible para el usuario) verificándolo dentro de `doPost` en `Code.gs` antes de procesar la reserva.
+
 ### Alternativas
 
 Si prefieres no usar Google Apps Script, el mismo `fetch` de `js/main.js` puede apuntar a cualquier otro backend de formularios (Formspree, EmailJS, una API propia), enviando `new FormData(bookingForm)` al endpoint que elijas.
