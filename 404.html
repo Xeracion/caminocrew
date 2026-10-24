@@ -26,6 +26,14 @@
     margin-bottom: .1em;
   }
   .notfound-wrap { max-width: 640px; }
+  .notfound-photo {
+    background-image: url('assets/img/mojon-404.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  .notfound-photo .hero-overlay {
+    background: rgba(0, 0, 0, 0.72);
+  }
 </style>
 </head>
 <body>
@@ -46,10 +54,7 @@
 </header>
 
 <main>
-  <section class="hero notfound-hero">
-    <video class="hero-video" autoplay muted playsinline preload="auto">
-      <source src="assets/video/hero.mp4" type="video/mp4">
-    </video>
+  <section class="hero notfound-hero notfound-photo">
     <div class="hero-overlay"></div>
     <div class="wrap hero-inner notfound-wrap">
       <p class="notfound-code">404</p>
