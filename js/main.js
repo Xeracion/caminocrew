@@ -56,66 +56,69 @@ document.querySelectorAll('.fade-in').forEach((el) => revealObserver.observe(el)
 const GAS_ENDPOINT_URL = 'https://script.google.com/macros/s/AKfycbx1yTJXbBqW0icMHo9Fdh9nwhVX91FXAia8EnuqDn5VE4iki5Ky3ZwQ0m9RIo30S2Y9/exec';
 
 const bookingForm = document.getElementById('bookingForm');
-const formNote = document.getElementById('formNote');
-const submitBtn = document.getElementById('submitBtn');
-const honeypotField = document.getElementById('website');
-const loadedAtField = document.getElementById('loadedAt');
-const MIN_SUBMIT_SECONDS = 3;
 
-// Marca el instante en que se cargó el formulario, para detectar envíos
-// instantáneos típicos de bots (ver comprobación de tiempo mínimo más abajo)
-loadedAtField.value = String(Date.now());
+if (bookingForm) {
+  const formNote = document.getElementById('formNote');
+  const submitBtn = document.getElementById('submitBtn');
+  const honeypotField = document.getElementById('website');
+  const loadedAtField = document.getElementById('loadedAt');
+  const MIN_SUBMIT_SECONDS = 3;
 
-bookingForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
+  // Marca el instante en que se cargó el formulario, para detectar envíos
+  // instantáneos típicos de bots (ver comprobación de tiempo mínimo más abajo)
+  loadedAtField.value = String(Date.now());
 
-  // Honeypot: campo invisible para personas, pero que los bots suelen rellenar.
-  // Si viene con contenido, descartamos el envío en silencio sin avisar al bot.
-  if (honeypotField.value.trim() !== '') {
-    bookingForm.reset();
-    return;
-  }
+  bookingForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-  // Un envío que llega en menos de MIN_SUBMIT_SECONDS casi siempre es un bot.
-  const elapsedSeconds = (Date.now() - Number(loadedAtField.value)) / 1000;
-  if (elapsedSeconds < MIN_SUBMIT_SECONDS) {
-    bookingForm.reset();
-    return;
-  }
-
-  if (!bookingForm.checkValidity()) {
-    bookingForm.reportValidity();
-    return;
-  }
-
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'Enviando...';
-  formNote.textContent = '';
-  formNote.className = 'form-note';
-
-  try {
-    if (GAS_ENDPOINT_URL.includes('TU_DEPLOYMENT_ID')) {
-      throw new Error('Falta configurar GAS_ENDPOINT_URL en js/main.js');
+    // Honeypot: campo invisible para personas, pero que los bots suelen rellenar.
+    // Si viene con contenido, descartamos el envío en silencio sin avisar al bot.
+    if (honeypotField.value.trim() !== '') {
+      bookingForm.reset();
+      return;
     }
 
-    // El Web App de Apps Script no admite CORS legible desde fetch, así que se
-    // envía en modo "no-cors": no podemos leer la respuesta, pero la petición
-    // llega igualmente y el script procesa y guarda los datos.
-    await fetch(GAS_ENDPOINT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      body: new FormData(bookingForm),
-    });
+    // Un envío que llega en menos de MIN_SUBMIT_SECONDS casi siempre es un bot.
+    const elapsedSeconds = (Date.now() - Number(loadedAtField.value)) / 1000;
+    if (elapsedSeconds < MIN_SUBMIT_SECONDS) {
+      bookingForm.reset();
+      return;
+    }
 
-    formNote.textContent = '¡Gracias! Hemos recibido tu solicitud, te contactamos en menos de 48h.';
-    formNote.classList.add('success');
-    bookingForm.reset();
-  } catch (err) {
-    console.error(err);
-    formNote.textContent = 'No hemos podido enviar tu solicitud. Escríbenos a info@xeracion.org.';
-    formNote.classList.add('error');
-  } finally {
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'Enviar solicitud de reserva';
-  }
-});
+    if (!bookingForm.checkValidity()) {
+      bookingForm.reportValidity();
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Enviando...';
+    formNote.textContent = '';
+    formNote.className = 'form-note';
+
+    try {
+      if (GAS_ENDPOINT_URL.includes('TU_DEPLOYMENT_ID')) {
+        throw new Error('Falta configurar GAS_ENDPOINT_URL en js/main.js');
+      }
+
+      // El Web App de Apps Script no admite CORS legible desde fetch, así que se
+      // envía en modo "no-cors": no podemos leer la respuesta, pero la petición
+      // llega igualmente y el script procesa y guarda los datos.
+      await fetch(GAS_ENDPOINT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        body: new FormData(bookingForm),
+      });
+
+      formNote.textContent = '¡Gracias! Hemos recibido tu solicitud, te contactamos en menos de 48h.';
+      formNote.classList.add('success');
+      bookingForm.reset();
+    } catch (err) {
+      console.error(err);
+      formNote.textContent = 'No hemos podido enviar tu solicitud. Escríbenos a info@xeracion.org.';
+      formNote.classList.add('error');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Enviar solicitud de reserva';
+    }
+  });
+}

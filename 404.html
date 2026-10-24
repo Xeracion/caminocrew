@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Página no encontrada · Caminocrew</title>
+<meta name="description" content="Esta página no existe. Vuelve a la ruta principal de Caminocrew.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥾</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .notfound-hero {
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+  }
+  .notfound-code {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(5rem, 16vw, 9rem);
+    line-height: .9;
+    color: var(--lime);
+    margin-bottom: .1em;
+  }
+  .notfound-wrap { max-width: 640px; }
+</style>
+</head>
+<body>
+
+<header class="site-header" id="top">
+  <div class="wrap header-inner">
+    <a href="index.html" class="logo">camino<span>crew</span></a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#pack">El pack</a>
+      <a href="index.html#itinerario">Itinerario</a>
+      <a href="index.html#faqs">FAQs</a>
+      <a href="index.html#reserva" class="btn btn-small">Reservar plaza</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <section class="hero notfound-hero">
+    <video class="hero-video" autoplay muted playsinline preload="auto">
+      <source src="assets/video/hero.mp4" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="wrap hero-inner notfound-wrap">
+      <p class="notfound-code">404</p>
+      <p class="eyebrow">Fuera de ruta</p>
+      <h1>Te has desviado del Camino.</h1>
+      <p class="hero-sub">Esta página no existe, pero la señal sigue siendo la misma: vuelve a la ruta principal y sigue las flechas.</p>
+      <div class="hero-cta">
+        <a href="index.html" class="btn btn-primary">Volver al inicio</a>
+        <a href="index.html#reserva" class="btn btn-ghost">Reservar mi plaza</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <div>
+      <a href="index.html" class="logo">camino<span>crew</span></a>
+      <p>Viajes grupales por el Camino Inglés a Santiago de Compostela.</p>
+    </div>
+    <div class="footer-links">
+      <a href="index.html#pack">El pack</a>
+      <a href="index.html#itinerario">Itinerario</a>
+      <a href="index.html#faqs">FAQs</a>
+      <a href="index.html#reserva">Reservar</a>
+      <a href="privacidad.html">Privacidad</a>
+    </div>
+  </div>
+  <p class="footer-legal">© <span id="year"></span> Caminocrew. Todos los derechos reservados.</p>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
